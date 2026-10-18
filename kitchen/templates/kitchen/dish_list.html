@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Dish List</h1>
+
+    {% for dish in object_list %}
+        <p>{{ dish.name }} - {{ dish.price }}</p>
+    {% empty %}
+        <p>No dishes available</p>
+    {% endfor %}
+{% endblock %}
