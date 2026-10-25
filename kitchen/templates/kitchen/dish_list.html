@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>Dish List</h1>
+  <a href="{% url 'kitchen:dish-create' %}">
+  Add new dish
+</a>
   <form method="get">
   <input
   type="text"
@@ -13,10 +16,15 @@
   </form>
 
     {% for dish in object_list %}
-        <p>{{ dish.name }} - {{ dish.price }}</p>
-    {% empty %}
-        <p>No dishes available</p>
-    {% endfor %}
+  <p>
+    <a href="{% url "kitchen:dish-detail" dish.pk %}">
+      {{ dish.name }}
+    </a>
+    - {{ dish.price }}
+  </p>
+{% empty %}
+  <p>No dishes available</p>
+{% endfor %}
   {% if is_paginated %}
   <div>
     {% if page_obj.has_previous %}

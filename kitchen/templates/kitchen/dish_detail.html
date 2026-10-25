@@ -12,4 +12,15 @@
   {% empty %}
     <p>No cooks assigned</p>
   {% endfor %}
+  <a href="{% url 'kitchen:dish-update' dish.pk %}">
+  Edit
+</a>
+
+<a href="{% url 'kitchen:dish-delete' dish.pk %}">
+  Delete
+</a>
+
+<a href="{% url 'kitchen:dish-list' %}">
+  Back to list
+</a>
 {% endblock %}
