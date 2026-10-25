@@ -2,6 +2,15 @@
 
 {% block content %}
     <h1>Dish List</h1>
+  <form method="get">
+  <input
+  type="text"
+  name="name"
+  placeholder="Search dishes"
+  value="{{ request.Get.name }}"
+  >
+  <button type="submit">Search</button>
+  </form>
 
     {% for dish in object_list %}
         <p>{{ dish.name }} - {{ dish.price }}</p>
