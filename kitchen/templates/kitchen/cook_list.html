@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Cook List</h1>
+
+  {% for cook in object_list %}
+    <p>
+      <a href="{% url 'kitchen:cook-detail' cook.pk %}">
+        {{ cook.username }}
+      </a>
+      — {{ cook.years_of_experience|default_if_none:"0" }} years
+    </p>
+  {% empty %}
+    <p>No cooks available</p>
+  {% endfor %}
+{% endblock %}

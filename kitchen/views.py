@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from kitchen.forms import DishSearchForm
-from kitchen.models import Dish
+from kitchen.models import Dish, Cook
 
 
 class DishListView(LoginRequiredMixin, ListView):
@@ -51,3 +52,39 @@ class DishUpdateView(LoginRequiredMixin, UpdateView):
 class DishDeleteView(LoginRequiredMixin, DeleteView):
     model = Dish
     success_url = reverse_lazy("kitchen:dish-list")
+
+
+class CookListView(LoginRequiredMixin, ListView):
+    model = Cook
+    paginate_by = 5
+
+
+class CookDetailView(LoginRequiredMixin, DetailView):
+    model = Cook
+
+
+class CookUpdateView(LoginRequiredMixin, UpdateView):
+    model = Cook
+    fields = [
+        "first_name",
+        "last_name",
+        "years_of_experience",
+    ]
+    success_url = reverse_lazy("kitchen:cook-list")
+
+    def get_object(self, queryset=None):
+        cook = super().get_object(queryset)
+        if cook != self.request.user and not self.request.user.is_superuser:
+            raise PermissionDenied
+        return cook
+
+
+class CookDeleteView(LoginRequiredMixin, DeleteView):
+    model = Cook
+    success_url = reverse_lazy("kitchen:cook-list")
+
+    def get_object(self, queryset=None):
+        cook = super().get_object(queryset)
+        if not self.request.user.is_superuser:
+            raise PermissionDenied
+        return cook

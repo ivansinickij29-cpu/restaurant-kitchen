@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ cook.username }}</h1>
+
+  <p>First name: {{ cook.first_name }}</p>
+  <p>Last name: {{ cook.last_name }}</p>
+  <p>Experience: {{ cook.years_of_experience }} years</p>
+
+  <h2>Dishes:</h2>
+
+  {% for dish in cook.dishes.all %}
+    <p>{{ dish.name }}</p>
+  {% empty %}
+    <p>No dishes assigned</p>
+  {% endfor %}
+
+  <a href="{% url 'kitchen:cook-list' %}">
+    Back to cooks
+  </a>
+{% endblock %}
