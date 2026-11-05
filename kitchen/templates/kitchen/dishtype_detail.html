@@ -14,4 +14,11 @@
   <a href="{% url 'kitchen:dish-type-list' %}">
     Back to dish types
   </a>
+  <a href="{% url 'kitchen:dish-type-update' dishtype.pk %}">
+  Edit
+</a>
+
+<a href="{% url 'kitchen:dish-type-delete' dishtype.pk %}">
+  Delete
+</a>
 {% endblock %}

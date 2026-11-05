@@ -5,6 +5,7 @@
     <title>Restaurant Kitchen</title>
 </head>
 <body>
+{% include "includes/navbar.html" %}
 {% if user.is_authenticated %}
   <p>Logged in as: {{ user.username }}</p>
 

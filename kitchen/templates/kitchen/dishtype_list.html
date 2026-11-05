@@ -2,12 +2,27 @@
 
 {% block content %}
   <h1>Dish Types</h1>
+  <form method="get">
+  <input
+    type="text"
+    name="name"
+    placeholder="Search dish types"
+    value="{{ request.GET.name }}"
+  >
+  <button type="submit">Search</button>
+</form>
 
+  <a href="{% url 'kitchen:dish-type-create' %}">
+  Add Dish Type
+</a>
   {% for dishtype in object_list %}
     <p>
-      {{ dishtype.name }}
+      <a href="{% url 'kitchen:dish-type-detail' dishtype.pk %}">
+  {{ dishtype.name }}
+</a>
     </p>
   {% empty %}
     <p>No dish types available</p>
   {% endfor %}
+  {% include "includes/pagination.html" %}
 {% endblock %}

@@ -18,4 +18,9 @@
   <a href="{% url 'kitchen:cook-list' %}">
     Back to cooks
   </a>
+  <a href="{% url 'kitchen:cook-update' cook.pk %}">Edit</a>
+
+<a href="{% url 'kitchen:cook-delete' cook.pk %}">Delete</a>
+
+<a href="{% url 'kitchen:cook-list' %}">Back to list</a>
 {% endblock %}
