@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from kitchen.forms import DishSearchForm
-from kitchen.models import Dish, Cook
+from kitchen.models import Dish, Cook, DishType
 
 
 class DishListView(LoginRequiredMixin, ListView):
@@ -88,3 +88,29 @@ class CookDeleteView(LoginRequiredMixin, DeleteView):
         if not self.request.user.is_superuser:
             raise PermissionDenied
         return cook
+
+
+class DishTypeListView(LoginRequiredMixin, ListView):
+    model = DishType
+    paginate_by = 5
+
+
+class DishTypeDetailView(LoginRequiredMixin, DetailView):
+    model = DishType
+
+
+class DishTypeUpdateView(LoginRequiredMixin, UpdateView):
+    model = DishType
+    fields = "__all__"
+    success_url = reverse_lazy("kitchen:dish-type-list")
+
+
+class DishTypeDeleteView(LoginRequiredMixin, DeleteView):
+    model = DishType
+    success_url = reverse_lazy("kitchen:dish-type-list")
+
+
+class DishTypeCreateView(LoginRequiredMixin, CreateView):
+    model = DishType
+    fields = "__all__"
+    success_url = reverse_lazy("kitchen:dish-type-list")

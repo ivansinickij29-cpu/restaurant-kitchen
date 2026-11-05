@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ dishtype.name }}</h1>
+
+  <h2>Dishes:</h2>
+
+  {% for dish in dishtype.dishes.all %}
+    <p>{{ dish.name }} — {{ dish.price }} PLN</p>
+  {% empty %}
+    <p>No dishes available</p>
+  {% endfor %}
+
+  <a href="{% url 'kitchen:dish-type-list' %}">
+    Back to dish types
+  </a>
+{% endblock %}
