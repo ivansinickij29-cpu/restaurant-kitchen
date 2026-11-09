@@ -1,7 +1,20 @@
 from django.urls import path
-from kitchen.views import CookListView, DishListView, DishDetailView, DishCreateView, DishUpdateView, DishDeleteView, \
-    CookDetailView, CookUpdateView, CookDeleteView, DishTypeDetailView, DishTypeListView, DishTypeUpdateView, \
-    DishTypeDeleteView, DishTypeCreateView
+from kitchen.views import (
+    CookListView,
+    DishListView,
+    DishDetailView,
+    DishCreateView,
+    DishUpdateView,
+    DishDeleteView,
+    CookDetailView,
+    CookUpdateView,
+    CookDeleteView,
+    DishTypeDetailView,
+    DishTypeListView,
+    DishTypeUpdateView,
+    DishTypeDeleteView,
+    DishTypeCreateView,
+)
 
 app_name = "kitchen"
 urlpatterns = [
@@ -16,7 +29,15 @@ urlpatterns = [
     path("cooks/<int:pk>/delete/", CookDeleteView.as_view(), name="cook-delete"),
     path("dish_types/", DishTypeListView.as_view(), name="dish-type-list"),
     path("dish_types/<int:pk>/", DishTypeDetailView.as_view(), name="dish-type-detail"),
-    path("dish_types/<int:pk>/update/", DishTypeUpdateView.as_view(), name="dish-type-update"),
-    path("dish_types/<int:pk>/delete/", DishTypeDeleteView.as_view(), name="dish-type-delete"),
+    path(
+        "dish_types/<int:pk>/update/",
+        DishTypeUpdateView.as_view(),
+        name="dish-type-update",
+    ),
+    path(
+        "dish_types/<int:pk>/delete/",
+        DishTypeDeleteView.as_view(),
+        name="dish-type-delete",
+    ),
     path("dish_types/create/", DishTypeCreateView.as_view(), name="dish-type-create"),
 ]

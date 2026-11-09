@@ -23,16 +23,15 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("kitchen.urls")),
-path(
-    "accounts/logout/",
-    LogoutView.as_view(
-        template_name="registration/logout.html"
+    path(
+        "accounts/logout/",
+        LogoutView.as_view(template_name="registration/logout.html"),
+        name="logout",
     ),
-    name="logout",
-),
     path("accounts/", include("django.contrib.auth.urls")),
     path(
-        "", RedirectView.as_view(pattern_name="kitchen:dish-list", permanent=False),
+        "",
+        RedirectView.as_view(pattern_name="kitchen:dish-list", permanent=False),
         name="home",
-    )
+    ),
 ]
