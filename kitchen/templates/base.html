@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Restaurant Kitchen</title>
-</head>
-<body>
-{% include "includes/navbar.html" %}
-{% if user.is_authenticated %}
-  <p>Logged in as: {{ user.username }}</p>
 
-  <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-  </form>
-{% else %}
-  <a href="{% url 'login' %}">Login</a>
-{% endif %}
-    {% block content %}
-    {% endblock %}
-</body>
-</html>
+{% extends "layouts/base.html" %}
+
+{% block navigation %}
+  {% include "includes/navbar.html" %}
+{% endblock navigation %}
+
+{% block footer %}
+{% endblock footer %}

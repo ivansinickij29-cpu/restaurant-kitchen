@@ -1,29 +1,111 @@
+
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h1>Dish List</h1>
-  <a href="{% url 'kitchen:dish-create' %}">
-  Add new dish
-</a>
-  <form method="get">
-  <input
-  type="text"
-  name="name"
-  placeholder="Search dishes"
-  value="{{ request.GET.name }}"
-  >
-  <button type="submit">Search</button>
-  </form>
 
-    {% for dish in object_list %}
-  <p>
-    <a href="{% url 'kitchen:dish-detail' dish.pk %}">
-      {{ dish.name }}
-    </a>
-    - {{ dish.price }}
-  </p>
-{% empty %}
-  <p>No dishes available</p>
-{% endfor %}
-  {% include "includes/pagination.html" %}
-{% endblock %}
+<!-- Restaurant Header -->
+<section
+  class="d-flex align-items-center justify-content-center"
+  style="
+    min-height: 350px;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.7)),
+      url('{% static 'img/chef_kitchen.jpg' %}');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <div class="container text-center py-5">
+    <h1 class="text-white font-weight-bolder">
+      Restaurant Menu
+    </h1>
+    <p class="text-white">
+      Manage your restaurant dishes
+    </p>
+  </div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+
+  <div class="card shadow-lg border-radius-xl border-0"
+       style="margin-top: -90px;">
+
+    <div class="card-body p-4 p-md-5">
+
+      <!-- Title and Add Button -->
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+        <h3 class="mb-0">Dish Management</h3>
+
+        <a href="{% url 'kitchen:dish-create' %}"
+           class="btn bg-gradient-primary mb-0">
+          + Add Dish
+        </a>
+
+      </div>
+
+      <!-- Search -->
+      <form method="get" class="row g-3 mb-4">
+
+        <div class="col-md-9">
+          <input
+            type="text"
+            name="name"
+            class="form-control border px-3"
+            placeholder="Search dishes..."
+            value="{{ request.GET.name }}"
+          >
+        </div>
+
+        <div class="col-md-3">
+          <button type="submit"
+                  class="btn bg-gradient-dark w-100 mb-0">
+            Search
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Dish List -->
+      <div class="list-group list-group-flush">
+
+        {% for dish in object_list %}
+
+          <a href="{% url 'kitchen:dish-detail' dish.pk %}"
+             class="list-group-item list-group-item-action
+                    d-flex justify-content-between
+                    align-items-center py-3">
+
+            <span class="font-weight-bold text-dark">
+              {{ dish.name }}
+            </span>
+
+            <span class="badge bg-gradient-dark">
+              {{ dish.price }}
+            </span>
+
+          </a>
+
+        {% empty %}
+
+          <p class="text-center text-muted py-4">
+            No dishes available
+          </p>
+
+        {% endfor %}
+
+      </div>
+
+      <!-- Pagination -->
+      <div class="mt-4">
+        {% include "includes/pagination.html" %}
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock content %}

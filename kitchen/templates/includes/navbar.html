@@ -1,6 +1,57 @@
-<nav>
-  <a href="{% url 'kitchen:dish-list' %}">Dishes</a> |
-  <a href="{% url 'kitchen:cook-list' %}">Cooks</a> |
-  <a href="{% url 'kitchen:dish-type-list' %}">Dish Types</a>
-</nav>
-<hr>
+
+<div class="container mt-3">
+  <nav class="navbar navbar-expand-lg blur border-radius-xl shadow px-4 py-3">
+    <div class="container-fluid px-0">
+
+      <a class="navbar-brand font-weight-bolder"
+         href="{% url 'kitchen:dish-list' %}">
+        🍽️ Restaurant Kitchen
+      </a>
+
+      <div class="d-flex flex-wrap align-items-center gap-3 ms-auto">
+
+        <a class="nav-link font-weight-semibold"
+           href="{% url 'kitchen:dish-list' %}">
+          Dishes
+        </a>
+
+        <a class="nav-link font-weight-semibold"
+           href="{% url 'kitchen:cook-list' %}">
+          Cooks
+        </a>
+
+        <a class="nav-link font-weight-semibold"
+           href="{% url 'kitchen:dish-type-list' %}">
+          Dish Types
+        </a>
+
+        {% if user.is_authenticated %}
+          <div class="d-flex align-items-center gap-2 ms-lg-3">
+
+            <span class="bg-gradient-dark text-white rounded-circle
+                         d-flex align-items-center justify-content-center"
+                  style="width: 38px; height: 38px;">
+              <i class="material-symbols-rounded">person</i>
+            </span>
+
+            <span class="text-sm font-weight-bold">
+              {{ user.username }}
+            </span>
+
+            <form method="post"
+                  action="{% url 'logout' %}"
+                  class="m-0">
+              {% csrf_token %}
+              <button type="submit"
+                      class="btn btn-outline-dark btn-sm mb-0">
+                Logout
+              </button>
+            </form>
+
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </nav>
+</div>

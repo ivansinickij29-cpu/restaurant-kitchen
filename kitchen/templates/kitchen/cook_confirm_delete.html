@@ -1,14 +1,51 @@
+
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Delete Cook</h1>
 
-  <p>Are you sure you want to delete {{ object.username }}?</p>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
 
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-  </form>
+      <div class="card shadow-lg border-radius-xl border-0">
+        <div class="card-body p-4 p-md-5">
 
-  <a href="{% url 'kitchen:cook-list' %}">Cancel</a>
+          <h3 class="mb-4">Delete Cook</h3>
+
+          <div class="alert alert-danger text-white">
+            Are you sure you want to delete
+            <strong>{{ object.username }}</strong>?
+          </div>
+
+          <p class="text-secondary">
+            This action cannot be undone.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 mt-4">
+
+            <form method="post">
+              {% csrf_token %}
+
+              {% if user.is_superuser %}
+  <a class="btn btn-outline-danger"
+     href="{% url 'kitchen:cook-delete' cook.pk %}">
+    Delete
+  </a>
+{% endif %}
+            </form>
+
+            <a href="{% url 'kitchen:cook-detail' object.pk %}"
+               class="btn btn-outline-dark">
+              Cancel
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 {% endblock %}

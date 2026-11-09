@@ -1,11 +1,73 @@
-{% extends "base.html" %}
+
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block navigation %}{% endblock navigation %}
 
 {% block content %}
-  <h1>Login</h1>
+<div class="container-fluid p-0">
+  <div class="row g-0 min-vh-100">
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-{% endblock %}
+    <!-- Left side: Login -->
+    <div class="col-lg-6 d-flex align-items-center justify-content-center p-5">
+      <div class="w-100" style="max-width: 380px;">
+
+        <h3 class="text-center mb-4">Restaurant Kitchen</h3>
+        <h5 class="text-center mb-4">Sign In</h5>
+
+        <form method="post" class="login-form">
+          {% csrf_token %}
+
+          {% if form.non_field_errors %}
+            <div class="text-danger mb-3">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          {% for field in form %}
+            <div class="mb-3">
+              <label class="form-label">{{ field.label }}</label>
+              {{ field }}
+              {{ field.errors }}
+            </div>
+          {% endfor %}
+
+          <button type="submit"
+                  class="btn bg-gradient-primary w-100 mt-3">
+            Sign In
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Right side: Kitchen Image -->
+    <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center text-white"
+         style="
+           background-image:
+             linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.55)),
+             url('{% static 'img/chef_kitchen.jpg' %}');
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;
+         ">
+
+    </div> <!-- Right column -->
+
+  </div> <!-- row -->
+</div> <!-- container-fluid -->
+{% endblock content %}
+
+{% block extra_style %}
+<style>
+  .login-form input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+</style>
+{% endblock extra_style %}
+
+{% block footer %}{% endblock footer %}
