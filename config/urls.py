@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from django.views.generic import RedirectView
+from kitchen.views import DishListView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -34,4 +35,5 @@ urlpatterns = [
         RedirectView.as_view(pattern_name="kitchen:dish-list", permanent=False),
         name="home",
     ),
+    path("", DishListView.as_view(), name="home"),
 ]

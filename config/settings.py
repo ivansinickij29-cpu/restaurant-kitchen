@@ -26,9 +26,9 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+DEBUG = os.environ.get("DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -138,5 +138,5 @@ MAILERS = {
 
 AUTH_USER_MODEL = "kitchen.Cook"
 
-LOGIN_REDIRECT_URL = "kitchen:dish-list"
+LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "login"
