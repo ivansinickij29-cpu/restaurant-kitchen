@@ -11,6 +11,7 @@ django-debug-toolbar==7.1.1
 django-theme-material-kit==1.0.26
 flake8==7.3.0
 fonttools==4.62.1
+gunicorn==27.0.1
 kiwisolver==1.5.0
 matplotlib==3.10.8
 mccabe==0.7.0
