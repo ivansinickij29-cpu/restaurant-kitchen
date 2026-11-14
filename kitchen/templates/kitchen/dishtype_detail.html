@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section
+  class="d-flex align-items-center justify-content-center"
+  style="
+    min-height: 250px;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.7)),
+      url('{% static 'img/chef_kitchen.jpg' %}');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <div class="container text-center py-5">
+    <h1 class="text-white font-weight-bolder">
+      {{ dishtype.name }}
+    </h1>
+
+    <p class="text-white">
+      Dish Category
+    </p>
+  </div>
+</section>
+  <div class="container py-5">
+  <div class="card shadow-lg border-radius-xl border-0"
+       style="margin-top: -90px;">
+    <div class="card-body p-4 p-md-5">
+
+
+  <h4>Dishes:</h4>
+
+  {% for dish in dishtype.dishes.all %}
+  <p>
+    <a class="text-primary font-weight-bold" href="{% url 'kitchen:dish-detail' dish.pk %}">
+      {{ dish.name }}
+    </a>
+    — {{ dish.price }} PLN
+  </p>
+{% empty %}
+  <p>No dishes available</p>
+{% endfor %}
+      <div class="d-flex flex-wrap gap-3 mt-4">
+
+  <a class="btn btn-outline-dark" href="{% url 'kitchen:dish-type-list' %}">
+    Back to dish types
+  </a>
+  <a class="btn bg-gradient-primary" href="{% url 'kitchen:dish-type-update' dishtype.pk %}">
+  Edit
+</a>
+
+<a class="btn btn-outline-danger" href="{% url 'kitchen:dish-type-delete' dishtype.pk %}">
+  Delete
+</a>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}
