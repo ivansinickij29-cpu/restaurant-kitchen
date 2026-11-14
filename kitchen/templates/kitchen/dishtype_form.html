@@ -1,0 +1,58 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="card shadow-lg border-radius-xl border-0">
+    <div class="card-body p-4 p-md-5">
+
+      {% if object %}
+        <h3 class="mb-4">Update Dish Type</h3>
+      {% else %}
+        <h3 class="mb-4">Create Dish Type</h3>
+      {% endif %}
+
+      <form method="post" class="dishtype-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <button class="btn bg-gradient-primary"
+                  type="submit">
+            Save
+          </button>
+
+          <a class="btn btn-outline-dark"
+             href="{% url 'kitchen:dish-type-list' %}">
+            Back to list
+          </a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .dishtype-form {
+    max-width: 650px;
+  }
+
+  .dishtype-form > p {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .dishtype-form input,
+  .dishtype-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+  }
+</style>
+
+{% endblock %}

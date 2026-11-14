@@ -1,0 +1,52 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="card shadow-lg border-radius-xl border-0">
+    <div class="card-body p-4 p-md-5">
+
+      {% if object %}
+        <h1>Update Cook</h1>
+      {% else %}
+        <h1>Create Cook</h1>
+      {% endif %}
+
+      <form method="post" class="cook-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button class="btn bg-gradient-primary"
+                type="submit">
+          Save
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .cook-form {
+    max-width: 650px;
+  }
+
+  .cook-form > p {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .cook-form input,
+  .cook-form textarea,
+  .cook-form select {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+  }
+</style>
+
+{% endblock %}
